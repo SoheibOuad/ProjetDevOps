@@ -1,6 +1,6 @@
 language: java
 before_script: cd ProjetDevOps/
-script: "mvn cobertura:cobertura"
+script: mvn test
 
 jdk:
   - openjdk8
