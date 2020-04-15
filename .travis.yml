@@ -1,5 +1,5 @@
 language: java
-before_script: cd project-devops/
+before_script: cd ProjetDevOps/
 script: "mvn cobertura:cobertura"
 
 jdk:
