@@ -1,1 +1,6 @@
 language: java
+before_script: cd project-devops/
+script: "mvn cobertura:cobertura"
+
+jdk:
+  - oraclejdk8
