@@ -55,11 +55,12 @@ public class Dataframe {
 	
 	public void displayDataByStrategy(DisplayStrategy str , int nb_lignes) throws ValueNotAllowed {
 		if(str.equals(StrategyFirst.STRF))
-			System.out.println("Affichage avec la strategy first");
+			System.out.println("Affichage avec la strategy first....");
 		else
-			System.out.println("Affichage avec la strategy last");
+			System.out.println("Affichage avec la strategy last....");
 		
 		if (nb_lignes < 1 || nb_lignes > datas.size()) {
+			System.out.println("Affichage n'est pas possible.");
 			throw new ValueNotAllowed("Value not allowed");
 		}
 		
@@ -84,7 +85,7 @@ public class Dataframe {
 		System.out.println();
 	}
 	
-	
+
 	
 	
 }
