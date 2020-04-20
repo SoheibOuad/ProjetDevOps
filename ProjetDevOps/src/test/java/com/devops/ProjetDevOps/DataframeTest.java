@@ -12,6 +12,7 @@ import static com.googlecode.catchexception.CatchException.caughtException;
 import devops.pandas.java.Dataframe;
 import exception.ValueNotAllowed;
 import utility.dev.lib.strategy.StrategyFirst;
+import utility.dev.lib.strategy.StrategyLast;
 
 public class DataframeTest {
 	private Dataframe dataframe;
@@ -122,4 +123,25 @@ public class DataframeTest {
         assert caughtException() instanceof ValueNotAllowed;
     
     }
+    
+    @Test
+    public void testDisplayLastLinesSucces() throws ValueNotAllowed {
+        catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, 3);
+        Assert.assertNull(caughtException());
+    }
+    
+    @Test
+    public void testDisplayLastLinesMoreLignesExcepted() throws ValueNotAllowed {
+        catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, dataframe.getDatas().size()+5);
+        assert caughtException() instanceof ValueNotAllowed;
+    
+    }
+    
+    @Test
+    public void testDisplayLasttLinesLessLignesExcepted() throws ValueNotAllowed {
+        catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, 0);
+        assert caughtException() instanceof ValueNotAllowed;
+    
+    }
+    
 }

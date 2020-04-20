@@ -5,6 +5,9 @@ import java.util.List;
 
 public class StrategyLast implements DisplayStrategy{
 	
+	/* Ce singleton nous permet d'avoir une présentation de cette classe pour pouvoir apés accéder à la
+	 * ci-dessous  
+	 */
 	public static final StrategyLast STRL = new  StrategyLast();
 	@Override
 	public ArrayList<List<Object>> LignesSelectione(ArrayList<List<Object>> datas, int nb_lignes) {
