@@ -7,7 +7,8 @@ import java.util.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
+import static com.googlecode.catchexception.CatchException.catchException;
+import static com.googlecode.catchexception.CatchException.caughtException;
 import devops.pandas.java.Dataframe;
 
 public class DataframeTest {
@@ -74,7 +75,18 @@ public class DataframeTest {
     	//Tester si les deux listes qui correspand au labels ont la meme taille
     	Assert.assertEquals(colonnesbase.size(),colonnes.size());
     	
+    	// Tester si les deux dataframes (de base et construit) ont les meme valeurs
     	
+    	
+    	for(int i=1; i<=end-begin;i++) {
+			for(int j=0;j<colonnes.size();j++) {
+				Assert.assertEquals(
+						//Valeur attendu
+						datasp.get(i-1).get(j), 
+						//Valeur construit
+						df.getDatas().get(i).get(j));
+			}
+		}
     	
     }
 
@@ -82,5 +94,13 @@ public class DataframeTest {
     public void testBasicConstructor() {
         testConstructor(dataframe, 0, dataframe.getDatas().size() - 1);
     }
+    
+    @Test
+    public void testDisplayDataframeOK() {
+        catchException(dataframe).DisplayData();
+        Assert.assertNull(caughtException());
+    }
+
+
 
 }
