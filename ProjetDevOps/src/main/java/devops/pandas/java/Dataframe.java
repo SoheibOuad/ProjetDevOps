@@ -33,7 +33,7 @@ public class Dataframe {
 	 * 
 	 * */
 	public void DisplayData() {
-		System.out.println("-- Affichage de toutes les données --");
+		System.out.println("-- Affichage de toutes les donnees --");
 		for(int i=0; i<datas.size();i++) {
 			for(int j=0;j<datas.get(i).size();j++) {
 				System.out.print(datas.get(i).get(j));
@@ -57,12 +57,12 @@ public class Dataframe {
 	
 	public void displayDataByStrategy(DisplayStrategy str , int nb_lignes) throws ValueNotAllowed {
 		if(str.equals(StrategyFirst.STRF))
-			System.out.println("Affichage avec la strategy first....");
+			System.out.println("Affichage avec la strategy first ....");
 		else
-			System.out.println("Affichage avec la strategy last....");
+			System.out.println("Affichage avec la strategy last ....");
 		
 		if (nb_lignes < 1 || nb_lignes > datas.size()) {
-			System.out.println("Affichage n'est pas possible.");
+			
 			throw new ValueNotAllowed("Value not allowed");
 		}
 		
@@ -89,33 +89,48 @@ public class Dataframe {
 	
 	public int minimum(String Column) throws ColumnDoesntExit , ColumnNotInt{
 		int min=0;
-		if(ColumnExit(Column)==false) 
+		if(ColumnExit(Column)==false) {
+			
 			throw new ColumnDoesntExit("Column Doesnt Exit");
+		}
 		
-		if(ComlumnInt(Column)==false)
+		if(ComlumnInt(Column)==false) {		
 			throw new ColumnNotInt("The column type is not Integer");
+		}
+		
+			
 		min=(Integer) datas.get(1).get(numColumn);
 		for(int j=2;j<datas.size();j++) {
 			min=Math.min((Integer) datas.get(j).get(numColumn),min);
 		}
+		
+		
 		return min;
 		
 	}
 	
 	public int maximum(String Column) throws ColumnDoesntExit , ColumnNotInt{
 		int max=0;
-		if(ColumnExit(Column)==false) 
+		if(ColumnExit(Column)==false) {		
 			throw new ColumnDoesntExit("Column Doesnt Exit");
+		}
+			
 		
-		if(ComlumnInt(Column)==false)
+		if(ComlumnInt(Column)==false) {		
 			throw new ColumnNotInt("The column type is not Integer");
+		}
+		
+		
 		max=(Integer) datas.get(1).get(numColumn);
 		for(int j=2;j<datas.size();j++) {
 			max=Math.max((Integer) datas.get(j).get(numColumn),max);
 		}
+		
+		
 		return max;
 		
 	}
+	
 	private boolean ColumnExit(String Column) {
 		boolean exit=false ;
 		for(int i=0;i<datas.get(0).size();i++) {

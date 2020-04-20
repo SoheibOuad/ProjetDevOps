@@ -143,12 +143,50 @@ public class DataframeTest {
     public void testDisplayLasttLinesLessLignesExcepted() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, 0);
         assert caughtException() instanceof ValueNotAllowed;
-    
+        System.out.println("Affichage n'est pas possible.");
     }
     
     @Test
     public void testMin() throws ColumnDoesntExit , ColumnNotInt {
     	int min = dataframe.minimum("Note");    	
     	Assert.assertEquals(7, min);
+    	System.out.println("Le test de minimum est bien passe , le resultat du test est : "+min);
     }
+    
+    @Test
+    public void testMinColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
+    	catchException(dataframe).minimum("Age");
+    	assert caughtException() instanceof ColumnDoesntExit;
+    	System.out.println("test min : Column doesnt exit");
+    }
+    
+    @Test
+    public void testMinColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
+    	catchException(dataframe).minimum("Nom");
+    	assert caughtException() instanceof ColumnNotInt;
+    	System.out.println("test min : Column not int");
+    }
+    
+    @Test
+    public void testMax() throws ColumnDoesntExit , ColumnNotInt {
+    	int max = dataframe.maximum("Note");    	
+    	Assert.assertEquals(17, max);
+    	System.out.println("Le test de maximum est bien passe , le resultat du test est : "+max);
+    }
+    
+    @Test
+    public void testMaxColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
+    	catchException(dataframe).maximum("Age");
+    	assert caughtException() instanceof ColumnDoesntExit;
+    	System.out.println("test max : Column doesnt exit");
+    }
+    
+    @Test
+    public void testMaxColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
+    	catchException(dataframe).maximum("Nom");
+    	assert caughtException() instanceof ColumnNotInt;
+    	System.out.println("test max : Column not int");
+    }
+    
+    
 }
