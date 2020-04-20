@@ -91,7 +91,7 @@ public class DataframeTest {
     }
 
     @Test
-    public void testBasicConstructor() {
+    public void testBConstructor() {
         testConstructor(dataframe, 0, dataframe.getDatas().size() - 1);
     }
     
@@ -101,6 +101,6 @@ public class DataframeTest {
         Assert.assertNull(caughtException());
     }
 
-
+    
 
 }

@@ -1,7 +1,7 @@
 package devops.pandas.java;
 import java.util.*; 
 public class Dataframe {
-	ArrayList<List<Object>> datas ;
+	private ArrayList<List<Object>> datas ;
 	
 	public Dataframe(ArrayList<List<Object>> datasp, List<Object> columns) {
 		datas = new ArrayList();
