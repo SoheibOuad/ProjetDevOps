@@ -5,7 +5,7 @@ import java.util.List;
 
 public class StrategyLast implements DisplayStrategy{
 	
-	
+	public static final StrategyLast STRL = new  StrategyLast();
 	@Override
 	public ArrayList<List<Object>> LignesSelectione(ArrayList<List<Object>> datas, int nb_lignes) {
 		// TODO Auto-generated method stub

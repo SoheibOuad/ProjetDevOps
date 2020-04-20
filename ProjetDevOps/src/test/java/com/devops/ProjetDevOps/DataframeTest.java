@@ -10,6 +10,8 @@ import org.junit.Test;
 import static com.googlecode.catchexception.CatchException.catchException;
 import static com.googlecode.catchexception.CatchException.caughtException;
 import devops.pandas.java.Dataframe;
+import exception.ValueNotAllowed;
+import utility.dev.lib.strategy.StrategyFirst;
 
 public class DataframeTest {
 	private Dataframe dataframe;
@@ -96,11 +98,28 @@ public class DataframeTest {
     }
     
     @Test
-    public void testDisplayDataframeOK() {
+    public void testDisplayDataframeSucces() {
         catchException(dataframe).DisplayData();
         Assert.assertNull(caughtException());
     }
 
+    @Test
+    public void testDisplayFirstLinesSucces() throws ValueNotAllowed {
+        catchException(dataframe).displayDataByStrategy(StrategyFirst.STRF, 3);
+        Assert.assertNull(caughtException());
+    }
     
-
+    @Test
+    public void testDisplayFirstLinesMoreLignesExcepted() throws ValueNotAllowed {
+        catchException(dataframe).displayDataByStrategy(StrategyFirst.STRF, dataframe.getDatas().size()+5);
+        assert caughtException() instanceof ValueNotAllowed;
+    
+    }
+    
+    @Test
+    public void testDisplayFirstLinesLessLignesExcepted() throws ValueNotAllowed {
+        catchException(dataframe).displayDataByStrategy(StrategyFirst.STRF, 0);
+        assert caughtException() instanceof ValueNotAllowed;
+    
+    }
 }
