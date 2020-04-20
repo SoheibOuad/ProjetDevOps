@@ -10,6 +10,8 @@ import org.junit.Test;
 import static com.googlecode.catchexception.CatchException.catchException;
 import static com.googlecode.catchexception.CatchException.caughtException;
 import devops.pandas.java.Dataframe;
+import exception.ColumnDoesntExit;
+import exception.ColumnNotInt;
 import exception.ValueNotAllowed;
 import utility.dev.lib.strategy.StrategyFirst;
 import utility.dev.lib.strategy.StrategyLast;
@@ -144,4 +146,9 @@ public class DataframeTest {
     
     }
     
+    @Test
+    public void testMin() throws ColumnDoesntExit , ColumnNotInt {
+    	int min = dataframe.minimum("Note");    	
+    	Assert.assertEquals(7, min);
+    }
 }

@@ -1,12 +1,14 @@
 package devops.pandas.java;
 import java.util.*;
 
+import exception.ColumnDoesntExit;
+import exception.ColumnNotInt;
 import exception.ValueNotAllowed;
 import utility.dev.lib.strategy.DisplayStrategy;
 import utility.dev.lib.strategy.StrategyFirst; 
 public class Dataframe {
 	private ArrayList<List<Object>> datas ;
-	
+	private int numColumn;
 	/*
 	 * Le constructeur prend deux param : 
 	 * datap qui sont les données 
@@ -85,7 +87,58 @@ public class Dataframe {
 		System.out.println();
 	}
 	
-
+	public int minimum(String Column) throws ColumnDoesntExit , ColumnNotInt{
+		int min=0;
+		if(ColumnExit(Column)==false) 
+			throw new ColumnDoesntExit("Column Doesnt Exit");
+		
+		if(ComlumnInt(Column)==false)
+			throw new ColumnNotInt("The column type is not Integer");
+		min=(Integer) datas.get(1).get(numColumn);
+		for(int j=2;j<datas.size();j++) {
+			min=Math.min((Integer) datas.get(j).get(numColumn),min);
+		}
+		return min;
+		
+	}
 	
+	public int maximum(String Column) throws ColumnDoesntExit , ColumnNotInt{
+		int max=0;
+		if(ColumnExit(Column)==false) 
+			throw new ColumnDoesntExit("Column Doesnt Exit");
+		
+		if(ComlumnInt(Column)==false)
+			throw new ColumnNotInt("The column type is not Integer");
+		max=(Integer) datas.get(1).get(numColumn);
+		for(int j=2;j<datas.size();j++) {
+			max=Math.max((Integer) datas.get(j).get(numColumn),max);
+		}
+		return max;
+		
+	}
+	private boolean ColumnExit(String Column) {
+		boolean exit=false ;
+		for(int i=0;i<datas.get(0).size();i++) {
+			if(datas.get(0).get(i).equals(Column)) {
+				exit=true;
+				this.numColumn=i;
+				break;
+			}		
+		}
+		return exit;
+	}
+	
+	private boolean ComlumnInt(String Column) {
+		boolean isInt=false ;
+
+		for(int j=1;j<datas.size();j++) {
+			isInt=false;
+			if(datas.get(j).get(numColumn) instanceof Integer) {
+				isInt=true;
+			}
+			
+		}
+		return isInt;
+	}
 	
 }
