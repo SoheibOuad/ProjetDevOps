@@ -69,11 +69,7 @@ public class DataframeTest {
         
 	}
 
-	   /**
-     * This class method compare each values in a dataframe with the source
-     *
-     * @param df
-     */
+	
     public static void testConstructor(Dataframe df, int begin, int end) {
     	//Compare la premiere ligne qui est contient les labels
     	List<Object> colonnes = df.getDatas().get(0);
@@ -81,7 +77,6 @@ public class DataframeTest {
     	Assert.assertEquals(colonnesbase.size(),colonnes.size());
     	
     	// Tester si les deux dataframes (de base et construit) ont les meme valeurs
-    	
     	
     	for(int i=1; i<=end-begin;i++) {
 			for(int j=0;j<colonnes.size();j++) {
@@ -186,6 +181,27 @@ public class DataframeTest {
     	catchException(dataframe).maximum("Nom");
     	assert caughtException() instanceof ColumnNotInt;
     	System.out.println("test max : Column not int");
+    }
+    
+    @Test
+    public void testSum() throws ColumnDoesntExit , ColumnNotInt{
+    	int sum =dataframe.sum("Note");
+    	Assert.assertEquals(74, sum);
+    	System.out.println("Le test de sum est bien passe , le resultat du test est : "+sum);
+    }
+    
+    @Test
+    public void testSumColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
+    	catchException(dataframe).sum("Age");
+    	assert caughtException() instanceof ColumnDoesntExit;
+    	System.out.println("test sum : Column doesnt exit");
+    }
+    
+    @Test
+    public void testSumColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
+    	catchException(dataframe).sum("Nom");
+    	assert caughtException() instanceof ColumnNotInt;
+    	System.out.println("test sum : Column not int");
     }
     
     

@@ -115,7 +115,6 @@ public class Dataframe {
 			throw new ColumnDoesntExit("Column Doesnt Exit");
 		}
 			
-		
 		if(ComlumnInt(Column)==false) {		
 			throw new ColumnNotInt("The column type is not Integer");
 		}
@@ -130,7 +129,28 @@ public class Dataframe {
 		return max;
 		
 	}
-	
+	public int sum(String Column) throws ColumnDoesntExit , ColumnNotInt{
+		int sum=0;
+		if(ColumnExit(Column)==false) {		
+			throw new ColumnDoesntExit("Column Doesnt Exit");
+		}
+		
+		if(ComlumnInt(Column)==false) {		
+			throw new ColumnNotInt("The column type is not Integer");
+		}
+		
+		for(int j=1;j<datas.size();j++) {
+			sum=sum+(Integer) datas.get(j).get(numColumn);
+		}
+		
+		return sum;
+	}
+	public float average(String Column) throws ColumnDoesntExit, ColumnNotInt {
+		float avg =0;
+		int sum = sum(Column);
+		avg = sum / (this.datas.size()-1);
+		return avg;
+	}
 	private boolean ColumnExit(String Column) {
 		boolean exit=false ;
 		for(int i=0;i<datas.get(0).size();i++) {
