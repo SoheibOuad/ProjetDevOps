@@ -204,5 +204,25 @@ public class DataframeTest {
     	System.out.println("test sum : Column not int");
     }
     
+    @Test 
+    public void testAvg()throws ColumnDoesntExit , ColumnNotInt{
+    	float avg = dataframe.average("Note");
+    	Assert.assertEquals((float)(74/6), avg , 0);
+    	System.out.println("Le test de avg est bien passe , le resultat du test est : "+avg);
+    }
+    
+    @Test
+    public void testAvgColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
+    	catchException(dataframe).average("Age");
+    	assert caughtException() instanceof ColumnDoesntExit;
+    	System.out.println("test avg : Column doesnt exit");
+    }
+    
+    @Test
+    public void testAvgColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
+    	catchException(dataframe).average("Nom");
+    	assert caughtException() instanceof ColumnNotInt;
+    	System.out.println("test avg : Column not int");
+    }
     
 }
