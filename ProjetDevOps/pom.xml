@@ -139,7 +139,7 @@
               <!-- Legal values: instruction, branch, line, method. Optional, default instruction. -->
               <metric>instruction</metric>
 
-              <badgeFile>target/jacoco.svg</badgeFile>
+              <badgeFile>jacoco.svg</badgeFile>
             </configuration>
           </execution>
         </executions>
