@@ -25,11 +25,15 @@ public class DataframeTest {
 	public void setUp() {
 		
 		datasp = new ArrayList();
+		/* Construire la 1ere ligne qui sera les noms de colonnes. */
 		colonnesbase = new ArrayList<>();
 		colonnesbase.add("Nom");
 		colonnesbase.add("Prenom");
 		colonnesbase.add("Note");
         
+		/*
+		 * Construire les lignes .
+		 * */
         List<Object> ligne1 = new ArrayList<>();
         ligne1.add("Robert");
         ligne1.add("Mathieu");
@@ -57,13 +61,15 @@ public class DataframeTest {
 
         
       
-        
+        /* Ajouter les lignes dans une liste */
         datasp.add(ligne1);
         datasp.add(ligne2);
         datasp.add(ligne3);
         datasp.add(ligne4);
         datasp.add(ligne5);
         datasp.add(ligne6);
+        /* Construire le dataframe.
+         * */
         dataframe=new Dataframe(datasp,colonnesbase);
         
         
@@ -89,24 +95,37 @@ public class DataframeTest {
 		}
     	
     }
-
+    
+    /*
+     * Tester la construction de dataframe
+     * */
     @Test
     public void testBConstructor() {
         testConstructor(dataframe, 0, dataframe.getDatas().size() - 1);
     }
     
+    /*
+     * Tester le cas de succées d'affichage d'un dataframe
+     * */
     @Test
     public void testDisplayDataframeSucces() {
         catchException(dataframe).DisplayData();
         Assert.assertNull(caughtException());
     }
-
+    
+    /*
+     * Tester le cas de succées d'affichage des premiéres lignes.
+     * */
     @Test
     public void testDisplayFirstLinesSucces() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyFirst.STRF, 3);
         Assert.assertNull(caughtException());
     }
     
+    /*
+     * Tester le cas d'échou d'affichage des premiéres lignes quand on veut afficher plus de lignes 
+     * qu'on a le droit.
+     * */
     @Test
     public void testDisplayFirstLinesMoreLignesExcepted() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyFirst.STRF, dataframe.getDatas().size()+5);
@@ -114,6 +133,10 @@ public class DataframeTest {
     
     }
     
+    /*
+     * Tester le cas d'échou d'affichage des premiéres lignes quand on veut afficher moins de lignes 
+     * qu'on a le droit.
+     * */
     @Test
     public void testDisplayFirstLinesLessLignesExcepted() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyFirst.STRF, 0);
@@ -121,19 +144,29 @@ public class DataframeTest {
     
     }
     
+    /*
+     * Tester le cas de succées d'affichage des derniéres lignes.
+     * */
     @Test
     public void testDisplayLastLinesSucces() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, 3);
         Assert.assertNull(caughtException());
     }
     
+    /*
+     * Tester le cas d'échou d'affichage des derniéres lignes quand on veut afficher plus de lignes 
+     * qu'on a le droit.
+     * */
     @Test
     public void testDisplayLastLinesMoreLignesExcepted() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, dataframe.getDatas().size()+5);
         assert caughtException() instanceof ValueNotAllowed;
     
     }
-    
+    /*
+     * Tester le cas d'échou d'affichage des derniéres lignes quand on veut afficher moins de lignes 
+     * qu'on a le droit.
+     * */
     @Test
     public void testDisplayLasttLinesLessLignesExcepted() throws ValueNotAllowed {
         catchException(dataframe).displayDataByStrategy(StrategyLast.STRL, 0);
@@ -141,6 +174,9 @@ public class DataframeTest {
         System.out.println("Affichage n'est pas possible.");
     }
     
+    /*
+     * Tester le cas de succés de calcule du minimum des données d'une colonne
+     * */
     @Test
     public void testMin() throws ColumnDoesntExit , ColumnNotInt {
     	int min = dataframe.minimum("Note");    	
@@ -148,6 +184,9 @@ public class DataframeTest {
     	System.out.println("Le test de minimum est bien passe , le resultat du test est : "+min);
     }
     
+    /*
+     * Tester le cas de échoué de calcule du minimum lorsque la colonne n'existe pas
+     * */
     @Test
     public void testMinColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
     	catchException(dataframe).minimum("Age");
@@ -155,13 +194,18 @@ public class DataframeTest {
     	System.out.println("test min : Column doesnt exit");
     }
     
+    /*
+     * Tester le cas de échoué de calcule du minimum lorsque la colonne n'a pas des données entier
+     * */
     @Test
     public void testMinColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
     	catchException(dataframe).minimum("Nom");
     	assert caughtException() instanceof ColumnNotInt;
     	System.out.println("test min : Column not int");
     }
-    
+    /*
+     * Tester le cas de succés de calcule du maximum des données d'une colonne
+     * */
     @Test
     public void testMax() throws ColumnDoesntExit , ColumnNotInt {
     	int max = dataframe.maximum("Note");    	
@@ -169,13 +213,18 @@ public class DataframeTest {
     	System.out.println("Le test de maximum est bien passe , le resultat du test est : "+max);
     }
     
+    /*
+     * Tester le cas de échoué de calcule du maximum lorsque la colonne n'existe pas
+     * */
     @Test
     public void testMaxColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
     	catchException(dataframe).maximum("Age");
     	assert caughtException() instanceof ColumnDoesntExit;
     	System.out.println("test max : Column doesnt exit");
     }
-    
+    /*
+     * Tester le cas de échoué de calcule du maximum lorsque la colonne n'a pas des données entier
+     * */
     @Test
     public void testMaxColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
     	catchException(dataframe).maximum("Nom");
@@ -183,13 +232,18 @@ public class DataframeTest {
     	System.out.println("test max : Column not int");
     }
     
+    /*
+     * Tester le cas de succés de calcule du somme des données d'une colonne
+     * */
     @Test
     public void testSum() throws ColumnDoesntExit , ColumnNotInt{
     	int sum =dataframe.sum("Note");
     	Assert.assertEquals(74, sum);
     	System.out.println("Le test de sum est bien passe , le resultat du test est : "+sum);
     }
-    
+    /*
+     * Tester le cas de échoué de calcule du somme lorsque la colonne n'existe pas
+     * */
     @Test
     public void testSumColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
     	catchException(dataframe).sum("Age");
@@ -197,27 +251,36 @@ public class DataframeTest {
     	System.out.println("test sum : Column doesnt exit");
     }
     
+    /*
+     * Tester le cas de échoué de calcule du somme lorsque la colonne n'a pas des données entier
+     * */
     @Test
     public void testSumColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
     	catchException(dataframe).sum("Nom");
     	assert caughtException() instanceof ColumnNotInt;
     	System.out.println("test sum : Column not int");
     }
-    
+    /*
+     * Tester le cas de succés de calcule du moyenne des données d'une colonne
+     * */
     @Test 
     public void testAvg()throws ColumnDoesntExit , ColumnNotInt{
     	float avg = dataframe.average("Note");
     	Assert.assertEquals((float)(74/6), avg , 0);
     	System.out.println("Le test de avg est bien passe , le resultat du test est : "+avg);
     }
-    
+    /*
+     * Tester le cas de échoué de calcule du moyenne lorsque la colonne n'existe pas
+     * */
     @Test
     public void testAvgColumnDoesntexit()throws ColumnDoesntExit , ColumnNotInt{
     	catchException(dataframe).average("Age");
     	assert caughtException() instanceof ColumnDoesntExit;
     	System.out.println("test avg : Column doesnt exit");
     }
-    
+    /*
+     * Tester le cas de échoué de calcule du moyenne lorsque la colonne n'a pas des données entier
+     * */
     @Test
     public void testAvgColumnNotInt() throws ColumnDoesntExit , ColumnNotInt {
     	catchException(dataframe).average("Nom");

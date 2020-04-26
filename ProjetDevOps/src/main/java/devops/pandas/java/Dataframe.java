@@ -7,8 +7,10 @@ import exception.ValueNotAllowed;
 import utility.dev.lib.strategy.DisplayStrategy;
 import utility.dev.lib.strategy.StrategyFirst; 
 public class Dataframe {
+	
 	private ArrayList<List<Object>> datas ;
 	private int numColumn;
+	
 	/*
 	 * Le constructeur prend deux param : 
 	 * datap qui sont les données 
@@ -87,6 +89,12 @@ public class Dataframe {
 		System.out.println();
 	}
 	
+	/* Cette fonction prend en param le nom de la colonne .
+	 * Cette colonne doit exister et avoir des données de type entier.
+	 * Retourne le minimum des données qui se trouvent dans la colonne.
+	 *
+	 * */
+	
 	public int minimum(String Column) throws ColumnDoesntExit , ColumnNotInt{
 		int min=0;
 		if(ColumnExit(Column)==false) {
@@ -108,6 +116,11 @@ public class Dataframe {
 		return min;
 		
 	}
+	/* Cette fonction prend en param le nom de la colonne .
+	 * Cette colonne doit exister et avoir des données de type entier.
+	 * Retourne le maximum des données qui se trouvent dans la colonne .
+	 *
+	 * */
 	
 	public int maximum(String Column) throws ColumnDoesntExit , ColumnNotInt{
 		int max=0;
@@ -129,6 +142,13 @@ public class Dataframe {
 		return max;
 		
 	}
+	
+	/* Cette fonction prend en param le nom de la colonne .
+	 * Cette colonne doit exister et avoir des données de type entier.
+	 * Retourne la somme des données qui se trouvent dans la colonne .
+	 *
+	 * */
+	
 	public int sum(String Column) throws ColumnDoesntExit , ColumnNotInt{
 		int sum=0;
 		if(ColumnExit(Column)==false) {		
@@ -145,12 +165,23 @@ public class Dataframe {
 		
 		return sum;
 	}
+	
+	/* Cette fonction prend en param le nom de la colonne .
+	 * Cette colonne doit exister et avoir des données de type entier.
+	 * Retourne la moyenne des données qui se trouvent dans la colonne .
+	 *
+	 * */
+	
 	public float average(String Column) throws ColumnDoesntExit, ColumnNotInt {
 		float avg =0;
 		int sum = sum(Column);
 		avg = sum / (this.datas.size()-1);
 		return avg;
 	}
+	
+	/*
+	 * Cette fonction retourne si vrai ou faux la colonne pris en param existe.
+	 * */
 	private boolean ColumnExit(String Column) {
 		boolean exit=false ;
 		for(int i=0;i<datas.get(0).size();i++) {
@@ -163,6 +194,9 @@ public class Dataframe {
 		return exit;
 	}
 	
+	/*
+	 * Cette fonction retourne si vrai ou faux la colonne pris en param a des données de type entier. 
+	 * */
 	private boolean ComlumnInt(String Column) {
 		boolean isInt=false ;
 
